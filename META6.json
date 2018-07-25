@@ -1,0 +1,6 @@
+{
+  "perl": "6.c",
+  "name": "Telegram",
+  "authors": "Benjamin Frady",
+  "description": "Reactive Telegram bot library"
+}
