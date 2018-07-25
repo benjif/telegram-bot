@@ -1,6 +1,17 @@
 {
-  "perl": "6.c",
-  "name": "Telegram",
-  "authors": "Benjamin Frady",
-  "description": "Reactive Telegram bot library"
+  "perl" : "6.c",
+  "name" : "Telegram",
+  "version" : "0.0.1",
+  "license" : "CC0-1.0",
+  "tags" : [ "telegram", "bot" ],
+  "authors" : ["Benjamin Frady"],
+  "description" : "Reactive Telegram bot library",
+  "provides" : {
+    "Telegram": "lib/Telegram.pm6"
+  },
+  "depends" : [ "Cro::HTTP::Client" ],
+  "build-depends" : [ ],
+  "test-depends" : [ ],
+  "resources" : [ ],
+  "source-url" : "git://github.com/ijneb/telegram-bot.git"
 }
