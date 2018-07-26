@@ -1,3 +1,22 @@
 # Perl6 Telegram Bot Library
 
-This will soon be a reactive Telegram bot library written for Perl6.
+This library offers *some* Perl6 objects and routines that correspond to Telegram's bot API in a reactive form.
+
+```
+use Telegram;
+
+my $bot = Telegram::Bot.new('<Your bot token>');
+$bot.start(interval => 1); # Starts scanning for updates
+
+my $msgTap = $bot.messageTap; # A tap for updates
+
+react {
+  whenever $tap -> $msg {
+    say "{$msg.sender.username}: {$msg.text} in {$msg.chat.id}";
+  }
+  whenever signal(SIGINT) {
+    $bot.stop;
+    exit;
+  }
+}
+```
