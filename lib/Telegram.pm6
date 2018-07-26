@@ -1,6 +1,8 @@
 unit package Telegram;
 
 use Cro::HTTP::Client;
+use Telegram::Object::Chat;
+use Telegram::Object::Message;
 
 constant $baseUrl = "https://api.telegram.org/bot";
 
@@ -41,13 +43,16 @@ class Bot {
 
     my $change = False;
 
-    if ?$!lastUpdateId {
-      $change = True if $!lastUpdateId != $lastResult;
+    if ?$!lastUpdateId && $!lastUpdateId != $lastResult {
+      $change = True;
     }
 
+    my $oldUpdateId = $!lastUpdateId;
     $!lastUpdateId = $lastResult;
     if $change {
-      $!messages.emit($json<result>[$json<result>.elems - 1]<message>);
+      loop (my $i = 1; $i <= $json<result>.elems - 1; $i++) {
+        $!messages.emit(Telegram::Object::Message.new($json<result>[$i]<message>)) if $json<result>[$i]<update_id> > $oldUpdateId;
+      }
     }
   }
   method start(:$interval = 2) {
