@@ -12,6 +12,6 @@ method new($json) {
     is_bot => $json<is_bot>,
     username => ?$json<username> ?? $json<username> !! '',
     firstname => ?$json<first_name> ?? $json<first_name> !! '',
-    lastname => >$json<last_name> ?? $json<last_name> !! ''
+    lastname => ?$json<last_name> ?? $json<last_name> !! ''
   );
 }
