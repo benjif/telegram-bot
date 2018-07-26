@@ -1,17 +1,16 @@
 unit class Telegram::Object::Message;
 
 use Telegram::Object::Chat;
+use Telegram::Object::User;
 
 has $.chat;
 has $.text;
-has $.is_bot;
-has $.username;
+has $.sender;
 
 method new($json) {
   return self.bless(
     chat => Telegram::Object::Chat.new($json<chat>),
-    text => $json<text>,
-    is_bot => $json<from><is_bot>,
-    username => $json<from><username>
+    sender => Telegram::Object::User.new($json<from>),
+    text => ?$json<text> ?? $json<text> !! ''
   );
 }

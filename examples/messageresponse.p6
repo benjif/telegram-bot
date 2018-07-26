@@ -10,8 +10,9 @@ my $tap = $bot.messagesTap;
 
 react {
   whenever $tap -> $msg {
-    say $msg.text;
-    say $msg.chat.id;
+    say "Message: {$msg.text}";
+    say "Chat: {$msg.chat.id}";
+    say "Sender: {$msg.sender.username}";
   }
   whenever signal(SIGINT) {
     $bot.stop;
