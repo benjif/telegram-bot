@@ -2,7 +2,7 @@
 
 This library offers *some* Perl6 objects and routines that correspond to Telegram's bot API in a reactive form.
 
-```
+```perl6
 use Telegram;
 
 my $bot = Telegram::Bot.new('<Your bot token>');
