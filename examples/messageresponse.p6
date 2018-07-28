@@ -13,6 +13,8 @@ react {
     say "Message: {$msg.text}";
     say "Chat: {$msg.chat.id}";
     say "Sender: {$msg.sender.firstname}";
+    say "Date: {$msg.date}";
+    say "Image: {$msg.image.size}" if ?$msg.image;
   }
   whenever signal(SIGINT) {
     $bot.stop;

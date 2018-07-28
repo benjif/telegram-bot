@@ -4,7 +4,7 @@ use Cro::HTTP::Client;
 use Telegram::Object::Chat;
 use Telegram::Object::Message;
 
-constant $baseUrl = "https://api.telegram.org/bot";
+constant $telegramBaseUrl = 'https://api.telegram.org/bot';
 
 class Bot is export {
   has $.token;
@@ -20,7 +20,7 @@ class Bot is export {
   }
   method TWEAK {
     $!client = Cro::HTTP::Client.new:
-      base-uri => $baseUrl ~ $!token ~ '/',
+      base-uri => $telegramBaseUrl ~ $!token ~ '/',
       content-type => 'application/json',
       follow => False;
   }
@@ -43,7 +43,7 @@ class Bot is export {
 
     my $change = False;
 
-    if ?$!lastUpdateId && $!lastUpdateId != $lastResult {
+    if ?$!lastUpdateId && $!lastUpdateId != $lastResult && ?$!lastUpdateId {
       $change = True;
     }
 
