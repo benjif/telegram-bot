@@ -6,9 +6,6 @@
   "tags" : [ "telegram", "bot" ],
   "authors" : ["Benjamin Frady"],
   "description" : "Reactive Telegram bot library",
-  "provides" : {
-    "Telegram": "lib/Telegram.pm6"
-  },
   "depends" : [ "Cro::HTTP::Client" ],
   "build-depends" : [ ],
   "test-depends" : [ ],
