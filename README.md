@@ -6,7 +6,7 @@ This library offers *some* Perl6 objects and routines that correspond to Telegra
 use Telegram;
 
 my $bot = Telegram::Bot.new('<Your bot token>');
-$bot.start(interval => 1); # Starts scanning for updates
+$bot.start(interval => 1); # Starts scanning for updates; defaults to every 2 seconds
 
 my $msgTap = $bot.messageTap; # A tap for updates
 
@@ -20,3 +20,6 @@ react {
   }
 }
 ```
+
+## Installation
+`zef install telegram`
