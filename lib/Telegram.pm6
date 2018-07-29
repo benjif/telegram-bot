@@ -29,7 +29,7 @@ class Bot is export {
     my $json = await $response.body;
   }
   method !update {
-    my $response = await $!client.get('getUpdates?limit=10&allowed_updates=message&offset=' ~ (?$!lastUpdateId ?? $!lastUpdateId !! ''));
+    my $response = await $!client.get('getUpdates?allowed_updates=message&offset=' ~ (?$!lastUpdateId ?? $!lastUpdateId !! ''));
     CATCH {
       when X::Cro::HTTP::Error {
         die "Problem getting updates. Response code: {.response.status}";
@@ -42,8 +42,7 @@ class Bot is export {
     my $lastResult = $json<result>[$json<result>.elems - 1]<update_id>;
 
     my $change = False;
-
-    if ?$!lastUpdateId && $!lastUpdateId != $lastResult && ?$!lastUpdateId {
+    if ?$!lastUpdateId && $!lastUpdateId != $lastResult {
       $change = True;
     }
 

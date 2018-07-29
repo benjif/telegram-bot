@@ -3,7 +3,7 @@ use v6;
 use lib 'lib';
 use Telegram;
 
-my $bot = Telegram::Bot.new('633859659:AAH108rQTzVcaPcMgj3IW0ktESb3j6rNIgI');
+my $bot = Telegram::Bot.new('<Your Bot Token>');
 $bot.start(interval => 1);
 
 my $tap = $bot.messagesTap;
@@ -14,7 +14,7 @@ react {
     say "Chat: {$msg.chat.id}";
     say "Sender: {$msg.sender.firstname}";
     say "Date: {$msg.date}";
-    say "Image: {$msg.image.size}" if ?$msg.image;
+    say "Image Size: {$msg.image.size}" if ?$msg.image;
   }
   whenever signal(SIGINT) {
     $bot.stop;
