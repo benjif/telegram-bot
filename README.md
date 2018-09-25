@@ -8,10 +8,10 @@ use Telegram;
 my $bot = Telegram::Bot.new('<Your bot token>');
 $bot.start(interval => 1); # Starts scanning for updates; defaults to every 2 seconds
 
-my $msgTap = $bot.messageTap; # A tap for updates
+my $msgTap = $bot.messagesTap; # A tap for updates
 
 react {
-  whenever $tap -> $msg {
+  whenever $msgTap -> $msg {
     say "{$msg.sender.username}: {$msg.text} in {$msg.chat.id}";
   }
   whenever signal(SIGINT) {
