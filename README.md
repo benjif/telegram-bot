@@ -11,7 +11,7 @@ $bot.start(interval => 1); # Starts scanning for updates; defaults to every 2 se
 my $msgTap = $bot.messageTap; # A tap for updates
 
 react {
-  whenever $tap -> $msg {
+  whenever $msgTap -> $msg {
     say "{$msg.sender.username}: {$msg.text} in {$msg.chat.id}";
   }
   whenever signal(SIGINT) {
