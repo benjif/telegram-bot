@@ -6,6 +6,10 @@ use Telegram::Object::Message;
 
 constant $telegramBaseUrl = 'https://api.telegram.org/bot';
 
+sub urlEncode($text) {
+    return $text.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
+}
+
 class Bot is export {
   has $.token;
 
@@ -24,8 +28,8 @@ class Bot is export {
       content-type => 'application/json',
       follow => False;
   }
-  method sendMessage(:$chat_id!, :$text!) {
-    my $response = await $!client.get('sendMessage?chat_id=' ~ $chat_id ~ '&text=' ~ $text);
+  method sendMessage($chat_id!, $text!) {
+    my $response = await $!client.get('sendMessage?chat_id=' ~ urlEncode($chat_id) ~ '&text=' ~ urlEncode($text));
     my $json = await $response.body;
   }
   method !update {
@@ -57,7 +61,7 @@ class Bot is export {
       }
     }
   }
-  method start(:$interval = 2) {
+  method start($interval = 2) {
     $!on = True;
     start {
       while $!on {
