@@ -1,7 +1,7 @@
 {
-  "perl" : "6.c",
+  "perl" : "6.d",
   "name" : "Telegram",
-  "version" : "0.0.1",
+  "version" : "0.0.2",
   "license" : "CC0-1.0",
   "tags" : [ "telegram", "bot" ],
   "authors" : ["Benjamin Frady"],
