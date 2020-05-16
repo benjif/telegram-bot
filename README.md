@@ -22,4 +22,4 @@ react {
 ```
 
 ## Installation
-`zef install telegram`
+`zef install Telegram`
