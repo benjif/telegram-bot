@@ -3,7 +3,7 @@ use v6;
 use lib 'lib';
 use Telegram;
 
-my $bot = Telegram::Bot.new('<Your bot token here>');
+my $bot = Telegram::Bot.new(%*ENV<EXAMPLE_BOT_TOKEN>);
 $bot.start(1);
 
 my $tap = $bot.messagesTap;
