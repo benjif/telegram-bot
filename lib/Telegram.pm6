@@ -27,11 +27,11 @@ class Bot is export {
       follow => False;
   }
   method sendMessage($chat_id!, $text!) {
-    my $response = await $!client.get('sendMessage?chat_id='
-            ~ uri_encode( ~$chat_id )
-            ~ '&text=' ~ uri_encode($text));
+      my $response =
+              await $!client.get("sendMessage?chat_id=$chat_id&text="
+                      ~ uri_encode($text));
 
-    my $json = await $response.body;
+      my $json = await $response.body;
   }
   method !update {
     my $response = await $!client.get('getUpdates?allowed_updates=message&offset=' ~ (?$!lastUpdateId ?? $!lastUpdateId !! ''));
