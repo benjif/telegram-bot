@@ -3,12 +3,10 @@ unit module Telegram;
 use Cro::HTTP::Client;
 use Telegram::Object::Chat;
 use Telegram::Object::Message;
+use URI::Encode;
 
 constant $telegramBaseUrl = 'https://api.telegram.org/bot';
 
-sub urlEncode($text) {
-    return $text.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
-}
 
 class Bot is export {
   has $.token;
@@ -29,8 +27,11 @@ class Bot is export {
       follow => False;
   }
   method sendMessage($chat_id!, $text!) {
-    my $response = await $!client.get('sendMessage?chat_id=' ~ urlEncode($chat_id) ~ '&text=' ~ urlEncode($text));
-    my $json = await $response.body;
+      my $response =
+              await $!client.get("sendMessage?chat_id=$chat_id&text="
+                      ~ uri_encode($text));
+
+      my $json = await $response.body;
   }
   method !update {
     my $response = await $!client.get('getUpdates?allowed_updates=message&offset=' ~ (?$!lastUpdateId ?? $!lastUpdateId !! ''));
